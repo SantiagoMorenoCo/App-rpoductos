@@ -4,7 +4,6 @@ export interface Product {
   id: number;
   nombre: string;
   precio: number;
-  // Agrega otras propiedades si las necesitas
 }
 
 @Injectable({
