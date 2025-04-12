@@ -1,32 +1,38 @@
-import { Injectable } from '@angular/core';
-import { Producto } from '../models/producto.model';
+import { Injectable, signal } from '@angular/core';
+
+export interface Product {
+  id: number;
+  nombre: string;
+  precio: number;
+  // Agrega otras propiedades si las necesitas
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  private productos: Producto[] = [];
+  getProductos(): import("../models/producto.model").Producto[] {
+    throw new Error('Method not implemented.');
+  }
+  private products = signal<Product[]>([]);
+  private nextId = 1;
+  eliminarProductos: any;
 
-  constructor() {
-    const almacenados = localStorage.getItem('productos');
-    this.productos = almacenados ? JSON.parse(almacenados) : [];
+  getProducts() {
+    return this.products;
   }
 
-  agregarProducto(producto: Producto) {
-    this.productos.push(producto);
-    this.actualizarStorage();
+  addProduct(product: Omit<Product, 'id'>) {
+    const newProduct = {
+      id: this.nextId++,
+      ...product
+    };
+    
+    this.products.update(current => [...current, newProduct]);
+    return newProduct;
   }
 
-  getProductos(): Producto[] {
-    return [...this.productos]; 
-  }
-
-  eliminarProducto(index: number) {
-    this.productos.splice(index, 1);
-    this.actualizarStorage();
-  }
-
-  private actualizarStorage() {
-    localStorage.setItem('productos', JSON.stringify(this.productos));
+  deleteProduct(id: number) {
+    this.products.update(current => current.filter(p => p.id !== id));
   }
 }

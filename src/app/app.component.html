@@ -1,12 +1,11 @@
-<!-- src/app/pages/home/home.component.html -->
-<div class="container py-4">
-  <h1 class="text-center mb-4">Gestión de Productos</h1>
-  <div class="row">
-    <div class="col-md-5">
-      <app-product-form></app-product-form>
-    </div>
-    <div class="col-md-7">
-      <app-product-list></app-product-list>
-    </div>
+<form [formGroup]="productForm" (ngSubmit)="agregarProducto()">
+  <div>
+    <label for="nombre">Nombre:</label>
+    <input id="nombre" type="text" formControlName="nombre">
   </div>
-</div>
+  <div>
+    <label for="precio">Precio:</label>
+    <input id="precio" type="number" formControlName="precio">
+  </div>
+  <button type="submit" [disabled]="!productForm.valid">Agregar Producto</button>
+</form>

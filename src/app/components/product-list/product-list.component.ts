@@ -16,7 +16,7 @@ export class ProductListComponent implements OnInit {
   }
 
   eliminarProducto(index: number) {
-    this.productService.eliminarProducto(index);
+    this.productService.eliminarProductos(index);
     this.productos = this.productService.getProductos(); // Recargar lista
   }
 }

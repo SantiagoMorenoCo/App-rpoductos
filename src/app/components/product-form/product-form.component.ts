@@ -1,45 +1,31 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Producto } from 'src/app/models/producto.model';
-import { ProductService } from 'src/app/services/product.service';
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-product-form',
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule
+  ],
   templateUrl: './product-form.component.html',
+  styleUrls: ['./product-form.component.css']
 })
-export class ProductFormComponent implements OnInit {
-  productForm!: FormGroup;
-  categorias = ['Electrónicos', 'Alimentos', 'Ropa', 'Hogar'];
+export class ProductFormComponent {
+  productForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private productService: ProductService) {}
-
-  ngOnInit(): void {
+  constructor(private fb: FormBuilder) {
     this.productForm = this.fb.group({
-      nombre: ['', [Validators.required, Validators.minLength(3)]],
-      precio: [null, [Validators.required, Validators.min(0.01)]],
-      fechaCaducidad: ['', [Validators.required]],
-      categoria: ['', Validators.required],
-      tieneDescuento: [false]
+      nombre: ['', Validators.required],
+      precio: [0, Validators.required],
     });
   }
 
   agregarProducto() {
-    if (this.productForm.invalid) {
-      this.productForm.markAllAsTouched();
-      return;
+    if (this.productForm.valid) {
+      console.log(this.productForm.value);
+      this.productForm.reset();
     }
-
-    const producto: Producto = {
-      ...this.productForm.value,
-      fechaCaducidad: new Date(this.productForm.value.fechaCaducidad)
-    };
-
-    this.productService.agregarProducto(producto);
-    this.productForm.reset();
-  }
-
-  campoInvalido(campo: string): boolean {
-    const control = this.productForm.get(campo);
-    return control?.invalid && control?.touched;
   }
 }
