@@ -1,12 +1,15 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Producto } from './models/producto.model';
+import { ProductService } from './services/product.service';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'productos-app';
+  constructor(private productService: ProductService) {}
+
+  agregarProducto(producto: Producto) {
+    this.productService.agregarProducto(producto);
+  }
 }

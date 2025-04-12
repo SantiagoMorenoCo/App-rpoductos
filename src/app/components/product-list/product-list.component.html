@@ -1,0 +1,23 @@
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Precio</th>
+        <th>Caducidad</th>
+        <th>Categoría</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let producto of productos; let i = index">
+        <td>{{ producto.nombre }}</td>
+        <td [innerHTML]="producto.precio | descuento:producto.tieneDescuento"></td>
+        <td>{{ producto.fechaCaducidad | caducidad }}</td>
+        <td>{{ producto.categoria }}</td>
+        <td>
+          <button class="btn btn-danger btn-sm" (click)="eliminarProducto(i)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
