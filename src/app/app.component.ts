@@ -7,6 +7,7 @@ import { ProductService } from './services/product.service';
   templateUrl: './app.component.html',
 })
 export class AppComponent {
+  title: any;
   constructor(private productService: ProductService) {}
 
   agregarProducto(producto: Producto) {
