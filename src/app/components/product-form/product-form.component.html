@@ -1,36 +1,11 @@
 <form [formGroup]="productForm" (ngSubmit)="agregarProducto()">
-    <div class="mb-3">
-      <label class="form-label">Nombre del producto</label>
-      <input type="text" class="form-control" [class.is-invalid]="campoInvalido('nombre')" formControlName="nombre" />
-      <div *ngIf="campoInvalido('nombre')" class="text-danger">Debe tener al menos 3 caracteres.</div>
-    </div>
-  
-    <div class="mb-3">
-      <label class="form-label">Precio</label>
-      <input type="number" class="form-control" [class.is-invalid]="campoInvalido('precio')" formControlName="precio" />
-      <div *ngIf="campoInvalido('precio')" class="text-danger">Debe ser un valor positivo.</div>
-    </div>
-  
-    <div class="mb-3">
-      <label class="form-label">Fecha de caducidad</label>
-      <input type="date" class="form-control" [class.is-invalid]="campoInvalido('fechaCaducidad')" formControlName="fechaCaducidad" />
-      <div *ngIf="campoInvalido('fechaCaducidad')" class="text-danger">Ingrese una fecha válida.</div>
-    </div>
-  
-    <div class="mb-3">
-      <label class="form-label">Categoría</label>
-      <select class="form-select" [class.is-invalid]="campoInvalido('categoria')" formControlName="categoria">
-        <option value="">Seleccione una categoría</option>
-        <option *ngFor="let cat of categorias" [value]="cat">{{ cat }}</option>
-      </select>
-      <div *ngIf="campoInvalido('categoria')" class="text-danger">Seleccione una categoría.</div>
-    </div>
-  
-    <div class="form-check mb-3">
-      <input type="checkbox" class="form-check-input" formControlName="tieneDescuento" />
-      <label class="form-check-label">¿Tiene descuento?</label>
-    </div>
-  
-    <button class="btn btn-primary" type="submit">Agregar Producto</button>
-  </form>
-  
+  <div>
+    <label for="nombre">Nombre:</label>
+    <input id="nombre" type="text" formControlName="nombre">
+  </div>
+  <div>
+    <label for="precio">Precio:</label>
+    <input id="precio" type="number" formControlName="precio">
+  </div>
+  <button type="submit" [disabled]="!productForm.valid">Agregar Producto</button>
+</form>

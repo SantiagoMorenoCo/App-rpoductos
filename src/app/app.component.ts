@@ -1,6 +1,7 @@
+// src/app/app.component.ts
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { ProductFormComponent } from './components/product-form/product-form.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
 
@@ -11,10 +12,26 @@ import { ProductListComponent } from './components/product-list/product-list.com
     CommonModule,
     RouterOutlet,
     ProductFormComponent,
-    ProductListComponent
+    ProductListComponent,
+    
   ],
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  template: `
+    <div class="container mt-4">
+      <h1 class="mb-4">Gestión de Productos</h1>
+      
+      <div class="row">
+        <div class="col-md-4 mb-4">
+          <app-product-form></app-product-form>
+        </div>
+        <div class="col-md-4 mb-4">
+          <app-product-list></app-product-list>
+        </div>
+        <div class="col-md-4 mb-4">
+          <app-cart></app-cart>
+        </div>
+      </div>
+    </div>
+  `
 })
 export class AppComponent {
   title = 'productos-app';

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Producto } from 'src/app/models/producto.model';
+import { ProductService } from '../../services/product.service';
 import { CommonModule } from '@angular/common';
 
 
@@ -23,6 +24,6 @@ export class ProductListComponent implements OnInit {
 
   eliminarProducto(index: number) {
     this.productService.eliminarProductos(index);
-    this.productos = this.productService.getProductos(); // Recargar lista
+    this.productos = this.productService.getProductos(); 
   }
 }
